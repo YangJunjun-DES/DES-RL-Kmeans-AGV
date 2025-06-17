@@ -34,17 +34,10 @@ while(~isempty(OBSER))
     state = OBSER(1);
     isDone = 0;
     Observation = State_space(state,:);
-    if method == 1  % maximal value pattern index  26 states
+    if method == 1 
         [~, pattern_index] = max(Q_table(state,:)); 
-    elseif method == 2   
-        if ~online   %Only cluetering algorithm   3609 states
-            pattern_index = Cluster_pattern(state, Q_table, 1);
-        else        %Online algorithm  4339 states  
-            [pattern_value, ~] = rollout_test(Q_table, state, RO_nodes, ...
-                RO_traces, RO_depth, RO_gamma, n_actions, State_space, B_new);
-            Imp_Q_table(state, :) = pattern_value;
-            pattern_index = Cluster_pattern(1, pattern_value, 1);
-        end
+    elseif method == 2  
+            pattern_index = Cluster_pattern(state, Q_table, 1);    
     end
 
     logic_idx_set = B_new(pattern_index,:);
