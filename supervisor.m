@@ -34,10 +34,10 @@ while(~isempty(OBSER))
     state = OBSER(1);
     isDone = 0;
     Observation = State_space(state,:);
-    if method == 1 
+    if method == 1 %Only the maximal value
         [~, pattern_index] = max(Q_table(state,:)); 
-    elseif method == 2  
-            pattern_index = Cluster_pattern(state, Q_table, 1);    
+    else %use cluster algorithm
+        pattern_index = Cluster_pattern(state, Q_table, 1);    
     end
 
     logic_idx_set = B_new(pattern_index,:);
