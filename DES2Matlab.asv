@@ -1,0 +1,9 @@
+SUP_IPSR = zeros()
+for i = 1 :11
+    for j = 1:3:10
+        s = IPSR(i,j);
+        s_ = IPSR(i,j+1);
+        a = IPSR(j+2);
+        SUP_IPSR(s,s_,a) = 1;
+    end
+end
